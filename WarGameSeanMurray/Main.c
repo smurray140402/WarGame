@@ -48,22 +48,25 @@ void shuffleDeck(Card* deck) {
 void distributeCards(Card* deck, Card players[MAX_PLAYERS][CARDS_PER_PLAYER], int numPlayers) {
 	int cardPosition = 0;
 	for (int i = 0; i < numPlayers; i++) {
-		printf("\nPlayer %d\n", i + 1);
 		for (int j = 0; j < CARDS_PER_PLAYER; j++) {
 			players[i][j] = deck[cardPosition];
-			printf("%s of %s\n", players[i][j].rank, players[i][j].suit);
 			cardPosition++;
 		}
 	}
+}
 
-	// Test distribute function
-	printf("\nPlayer two's 3rd card is %s of %s\n", players[1][2].rank, players[1][2].suit);
+void printPlayerCards(Card players[MAX_PLAYERS][CARDS_PER_PLAYER], int numPlayers, int playerCards) {
+	for (int i = 0; i < CARDS_PER_PLAYER; i++) {
+		printf("%s of %s\n", players[playerCards][i].rank, players[playerCards][i].suit);
+
+	}
 }
 
 int main()
 {
 	// Variables
 	int numPlayers;
+	int playerCards;
 
 	// Create arrays
 	Card deck[TOTAL_CARDS];
@@ -86,6 +89,9 @@ int main()
 
 	// Give each player 13 cards
 	distributeCards(deck, players, numPlayers);
+
+	// Test print someones cards
+	printPlayerCards(players, numPlayers, 1);
 
 	return 0;
 }
