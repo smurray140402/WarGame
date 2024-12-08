@@ -55,10 +55,25 @@ void distributeCards(Card* deck, Card players[MAX_PLAYERS][CARDS_PER_PLAYER], in
 	}
 }
 
+// Prints certain players cards
 void printPlayerCards(Card players[MAX_PLAYERS][CARDS_PER_PLAYER], int numPlayers, int playerCards) {
 	for (int i = 0; i < CARDS_PER_PLAYER; i++) {
-		printf("%s of %s\n", players[playerCards][i].rank, players[playerCards][i].suit);
+		printf("Card %d: %s of %s\n", i+1, players[playerCards][i].rank, players[playerCards][i].suit);
+	}
+}
 
+// Round logic. Need a new function to find the winner if any and to keep track of scores
+void rounds(Card* deck, Card players[MAX_PLAYERS][CARDS_PER_PLAYER], int numPlayers) {
+	int playerCardChoice = 0;
+	for (int i = 0; i < numPlayers; i++) {
+		printf("\n\nPlayer %d: Choose which card you want to play (1-13);\n", i+1);
+		printf("====================================================\n");
+		printPlayerCards(players, numPlayers, i);
+		printf("====================================================\n");
+		printf("Your choice... ");
+		scanf("%d", &playerCardChoice);
+		printf("====================================================\n");
+		printf("You played a %s of %s\n\n", players[i][playerCardChoice-1].rank, players[i][playerCardChoice-1].suit);
 	}
 }
 
@@ -90,8 +105,8 @@ int main()
 	// Give each player 13 cards
 	distributeCards(deck, players, numPlayers);
 
-	// Test print someones cards
-	printPlayerCards(players, numPlayers, 1);
+	// One round only (need a loop for all the rounds)
+	rounds(deck, players, numPlayers);
 
 	return 0;
 }
