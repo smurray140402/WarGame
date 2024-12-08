@@ -7,6 +7,9 @@
 #define CARDS_PER_PLAYER 13
 #define MAX_PLAYERS 4
 
+// Structure that represents a card with a rank and suit.
+// "rank" is a pointer to a string representing the card's value 
+// "suit" is a pointer to a string representing the card's suit.
 typedef struct {
 	char* rank;
 	char* suit;
@@ -43,6 +46,9 @@ void shuffleDeck(Card* deck) {
 
 int main()
 {
+	// Variables
+	int numPlayers;
+
 	// Create array
 	Card deck[TOTAL_CARDS];
 
@@ -52,9 +58,13 @@ int main()
 	// Shuffle the deck
 	shuffleDeck(deck);
 
-	// Test to make sure deck is shuffled
-	for (int i = 0; i < TOTAL_CARDS; i++) {
-		printf("%s of %s\n", deck[i].rank, deck[i].suit);
+	// Prompt and read user input
+	printf("Enter the number of players (2-4): ");
+	scanf("%d", &numPlayers);
+
+	if (numPlayers < 2 || numPlayers > MAX_PLAYERS) {
+		printf("Invalid number of players. Please choose between 2 and 4 players.\n");
+		return 1;
 	}
 
 	return 0;
