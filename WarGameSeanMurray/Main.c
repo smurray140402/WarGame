@@ -12,7 +12,7 @@ typedef struct {
 	char* suit;
 } Card;
 
-
+// Function to create the deck
 void createDeck(Card* deck) {
 	int position = 0;
 	char* ranks[] = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace" };
@@ -27,6 +27,20 @@ void createDeck(Card* deck) {
 	}
 }
 
+// Function to shuffle the deck
+void shuffleDeck(Card* deck) {
+	// Seed the random number generator so each run creates a unique shuffled deck
+	srand(time(NULL));
+	for (int i = 0; i < TOTAL_CARDS; i++) {
+		int randomPosition = rand() % TOTAL_CARDS;
+
+		// Swap the current card with the card at randomPosition
+		Card tempCard = deck[i];
+		deck[i] = deck[randomPosition];
+		deck[randomPosition] = tempCard;
+	}
+}
+
 int main()
 {
 	// Create array
@@ -35,7 +49,10 @@ int main()
 	// Initialise the deck
 	createDeck(deck);
 
-	// Test to make sure deck is created
+	// Shuffle the deck
+	shuffleDeck(deck);
+
+	// Test to make sure deck is shuffled
 	for (int i = 0; i < TOTAL_CARDS; i++) {
 		printf("%s of %s\n", deck[i].rank, deck[i].suit);
 	}
